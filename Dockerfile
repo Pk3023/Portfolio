@@ -22,7 +22,7 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist
+RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-dist --ignore-platform-reqs
 RUN cp .env.example .env
 RUN touch database/database.sqlite
 RUN php artisan key:generate --force
