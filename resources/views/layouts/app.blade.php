@@ -25,10 +25,10 @@
             top: -50%;
             left: -50%;
             background:
-                radial-gradient(circle at 18% 45%, rgba(11, 114, 185, 0.28) 0%, transparent 42%),
-                radial-gradient(circle at 82% 76%, rgba(16, 163, 127, 0.22) 0%, transparent 42%),
-                radial-gradient(circle at 42% 16%, rgba(255, 209, 102, 0.18) 0%, transparent 38%);
-            animation: gradientShift 10s ease-in-out infinite;
+                radial-gradient(circle at 20% 50%, rgba(11, 114, 185, 0.15) 0%, transparent 50%),
+                radial-gradient(circle at 80% 80%, rgba(16, 163, 127, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 40% 20%, rgba(255, 209, 102, 0.08) 0%, transparent 50%);
+            animation: gradientShift 15s ease-in-out infinite;
         }
 
         .animated-bg::after {
@@ -36,9 +36,9 @@
             position: absolute;
             inset: 0;
             background-image:
-                linear-gradient(90deg, transparent 0%, rgba(11, 114, 185, 0.08) 50%, transparent 100%),
-                linear-gradient(180deg, transparent 0%, rgba(16, 163, 127, 0.06) 50%, transparent 100%);
-            animation: waveMotion 12s linear infinite;
+                linear-gradient(90deg, transparent 0%, rgba(11, 114, 185, 0.03) 50%, transparent 100%),
+                linear-gradient(180deg, transparent 0%, rgba(16, 163, 127, 0.02) 50%, transparent 100%);
+            animation: waveMotion 20s linear infinite;
         }
 
         @keyframes gradientShift {
@@ -66,11 +66,11 @@
         }
 
         .particle-dot {
-            width: 3px;
-            height: 3px;
-            background: rgba(255, 209, 102, 0.72);
+            width: 2px;
+            height: 2px;
+            background: rgba(11, 114, 185, 0.5);
             border-radius: 50%;
-            box-shadow: 0 0 14px rgba(11, 114, 185, 0.65);
+            box-shadow: 0 0 10px rgba(11, 114, 185, 0.3);
         }
 
         #music-btn {
@@ -138,7 +138,7 @@
         const particleContainer = document.getElementById('particles');
         if (!particleContainer) return;
 
-        const particleCount = 75;
+        const particleCount = 40;
         const particles = [];
 
         for (let i = 0; i < particleCount; i++) {
@@ -150,12 +150,12 @@
             particle.appendChild(dotDiv);
             particleContainer.appendChild(particle);
 
-            const size = Math.random() * 3.5 + 1.5;
+            const size = Math.random() * 3 + 1;
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight;
-            const vx = (Math.random() - 0.5) * 0.9;
-            const vy = (Math.random() - 0.5) * 0.9;
-            const opacity = Math.random() * 0.55 + 0.4;
+            const vx = (Math.random() - 0.5) * 0.5;
+            const vy = (Math.random() - 0.5) * 0.5;
+            const opacity = Math.random() * 0.5 + 0.3;
 
             particles.push({ el: particle, x, y, vx, vy, size, opacity });
 
@@ -178,8 +178,8 @@
 
                 p.vy += (Math.random() - 0.5) * 0.05;
                 p.vx += (Math.random() - 0.5) * 0.05;
-                p.vx = Math.max(-1.15, Math.min(1.15, p.vx));
-                p.vy = Math.max(-1.15, Math.min(1.15, p.vy));
+                p.vx = Math.max(-1, Math.min(1, p.vx));
+                p.vy = Math.max(-1, Math.min(1, p.vy));
 
                 p.el.style.left = p.x + 'px';
                 p.el.style.top = p.y + 'px';

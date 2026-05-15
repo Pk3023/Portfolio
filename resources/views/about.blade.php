@@ -1,8 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<section class="page-hero snowfall-container" style="background-image: url('{{ file_exists(public_path('images/bg-about.jpg')) ? asset('images/bg-about.jpg') : '' }}');">
-    <div class="snowfall" id="snowfall"></div>
+<section class="page-hero" style="background-image: url('{{ file_exists(public_path('images/bg-about.jpg')) ? asset('images/bg-about.jpg') : '' }}');">
     <div class="container about-inner slide-up">
         <div class="about-left">
             <img src="{{ asset('images/profile.jpg') }}" alt="Linkon" class="profile-photo about-photo animate-slide-in-text">
