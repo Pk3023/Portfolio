@@ -1,4 +1,4 @@
-﻿FROM php:8.2-fpm
+FROM php:8.2-apache
 
 RUN apt-get update && apt-get install -y \
     git \
@@ -12,9 +12,13 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libicu-dev \
     libgmp-dev \
+    libsqlite3-dev \
     libcurl4-openssl-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql zip mbstring xml xmlwriter bcmath intl gmp gd curl
+    && docker-php-ext-install pdo pdo_mysql pdo_sqlite sqlite3 zip mbstring xml xmlwriter bcmath intl gmp gd curl \
+    && a2enmod rewrite \
+    && sed -ri -e 's!/var/www/html!/var/www/html/public!g' /etc/apache2/sites-available/*.conf \
+    && sed -ri -e 's!/var/www/!/var/www/html/public!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
@@ -26,11 +30,8 @@ RUN composer install --no-dev --optimize-autoloader --no-interaction --prefer-di
 RUN cp .env.example .env
 RUN touch database/database.sqlite
 RUN php artisan key:generate --force
-RUN php artisan storage:link
-RUN php artisan migrate --force
-RUN php artisan config:cache
-RUN php artisan route:cache
-RUN php artisan view:cache
+RUN php artisan storage:link || true
+RUN chown -R www-data:www-data storage bootstrap/cache database
 
-EXPOSE 9000
-CMD ["php-fpm"]
+EXPOSE 80
+CMD ["sh", "-c", "sed -i \"s/Listen 80/Listen ${PORT:-80}/\" /etc/apache2/ports.conf && sed -i \"s/<VirtualHost \\*:80>/<VirtualHost *:${PORT:-80}>/\" /etc/apache2/sites-available/000-default.conf && php artisan migrate --force && php artisan config:cache && php artisan route:cache && php artisan view:cache && apache2-foreground"]
