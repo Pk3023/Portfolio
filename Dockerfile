@@ -12,8 +12,9 @@ RUN apt-get update && apt-get install -y \
     libxml2-dev \
     libicu-dev \
     libgmp-dev \
+    libcurl4-openssl-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql zip mbstring xml bcmath intl gmp gd
+    && docker-php-ext-install pdo pdo_mysql zip mbstring xml xmlwriter bcmath intl gmp gd curl
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
