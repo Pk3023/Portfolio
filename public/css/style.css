@@ -254,6 +254,7 @@ body { background: transparent; color: #fff; }
 
 .upload-area h3 {
     color: #fff;
+    margin-bottom: 16px;
     text-shadow: 0 1px 5px rgba(0, 0, 0, 0.5);
 }
 
@@ -270,6 +271,28 @@ body { background: transparent; color: #fff; }
     border:1px solid rgba(0,0,0,0.1);
     background: rgba(255, 255, 255, 0.9);
     color: #333;
+}
+
+.projects-page-panel {
+    border-radius: 12px;
+    padding: 28px;
+}
+
+.projects-page h2 {
+    margin-bottom: 22px;
+    font-size: clamp(30px, 4vw, 46px);
+}
+
+.upload-area small {
+    display: block;
+    margin-top: 6px;
+}
+
+.empty-state {
+    grid-column: 1 / -1;
+    padding: 20px;
+    text-align: center;
+    color: rgba(255, 255, 255, 0.78);
 }
 
 /* Contact */
@@ -532,3 +555,198 @@ body { background: transparent; color: #fff; }
 
 @keyframes spin { to { transform: rotate(360deg); } }
 
+/* Production polish */
+body {
+    min-height: 100vh;
+    background: #0f1419;
+    overflow-x: hidden;
+}
+
+.site-header {
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.24);
+}
+
+.site-header .logo {
+    letter-spacing: 0;
+}
+
+.site-header .nav a {
+    position: relative;
+}
+
+.site-header .nav a::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: -6px;
+    height: 2px;
+    background: #ffd166;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform 0.25s ease;
+}
+
+.site-header .nav a:hover::after {
+    transform: scaleX(1);
+}
+
+.hero {
+    min-height: calc(100vh - 80px);
+    padding-top: 40px;
+}
+
+.hero::before,
+.page-hero::before {
+    background:
+        linear-gradient(135deg, rgba(15, 20, 25, 0.74), rgba(11, 114, 185, 0.22)),
+        radial-gradient(circle at 68% 20%, rgba(255, 209, 102, 0.14), transparent 34%);
+}
+
+.hero-left {
+    padding: 26px 0;
+}
+
+.hero h1 {
+    max-width: 720px;
+    font-size: clamp(40px, 6vw, 72px);
+    line-height: 1.02;
+    margin-bottom: 18px;
+}
+
+.subtitle {
+    max-width: 680px;
+    font-size: clamp(17px, 2vw, 22px);
+    line-height: 1.55;
+}
+
+.profile-photo {
+    width: min(330px, 72vw);
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    border: 1px solid rgba(255, 255, 255, 0.22);
+    box-shadow:
+        0 26px 80px rgba(0, 0, 0, 0.42),
+        0 0 42px rgba(11, 114, 185, 0.34);
+}
+
+.profile-photo:hover {
+    transform: translateY(-5px) scale(1.035);
+}
+
+.projects-preview,
+.contact-container {
+    padding: 70px 20px;
+}
+
+.projects-preview h2,
+.contact-container h2 {
+    font-size: clamp(30px, 4vw, 46px);
+}
+
+.project-card,
+.upload-area,
+.contact-form,
+.projects-page-panel {
+    background: rgba(15, 20, 25, 0.72);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    box-shadow: 0 22px 70px rgba(0, 0, 0, 0.28);
+    backdrop-filter: blur(14px);
+}
+
+.project-card {
+    padding: 18px;
+}
+
+.project-card h4,
+.project-card p {
+    color: #fff;
+}
+
+.project-card p {
+    color: rgba(255, 255, 255, 0.78);
+    line-height: 1.55;
+}
+
+.project-card:hover {
+    transform: translateY(-10px) scale(1.015);
+}
+
+.btn {
+    font-weight: 700;
+    box-shadow: 0 12px 26px rgba(11, 114, 185, 0.24);
+}
+
+.btn:active {
+    transform: translateY(0);
+}
+
+.contact-form input,
+.contact-form textarea,
+.upload-area input,
+.upload-area textarea {
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #101820;
+}
+
+.fade-in {
+    animation-duration: 0.75s;
+}
+
+.slide-up {
+    animation-duration: 0.78s;
+}
+
+.animate-slide-in-text {
+    animation-duration: 0.62s;
+}
+
+.animate-scale-up {
+    animation-duration: 0.8s;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(30px) scale(0.98); }
+    to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes slideUp {
+    from { opacity: 0; transform: translateY(52px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideInTextFromRight {
+    0% { opacity: 0; transform: translateX(70px); filter: blur(4px); }
+    100% { opacity: 1; transform: translateX(0); filter: blur(0); }
+}
+
+@media (max-width: 900px) {
+    .site-header .container {
+        gap: 12px;
+        flex-direction: column;
+    }
+
+    .site-header .nav {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 12px;
+    }
+
+    .site-header .nav a {
+        margin-left: 0;
+    }
+
+    .main {
+        padding-top: 116px;
+    }
+
+    .hero {
+        min-height: auto;
+        padding-top: 24px;
+    }
+
+    .hero-left {
+        padding: 12px 0;
+    }
+}

@@ -4,17 +4,15 @@
     <meta charset="UTF-8"/>
     <meta name="viewport" content="width=device-width,initial-scale=1"/>
     <title>{{ $title ?? 'Linkon Mondol - Portfolio' }}</title>
-    <link rel="stylesheet" href="{{ asset('css/style.css') }}">
-    
+    <link rel="stylesheet" href="{{ asset('css/style.css') }}?v={{ filemtime(public_path('css/style.css')) }}">
+
     <style>
-        /* Animated Background Container */
         .animated-bg {
             position: fixed;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 50%, #0f1419 100%);
+            background: linear-gradient(135deg, #0f1419 0%, #1a1f2e 45%, #0f1419 100%);
             z-index: -1;
             overflow: hidden;
         }
@@ -24,58 +22,41 @@
             position: absolute;
             width: 200%;
             height: 200%;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(11, 114, 185, 0.15) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(16, 163, 127, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 40% 20%, rgba(255, 209, 102, 0.08) 0%, transparent 50%);
-            animation: gradientShift 15s ease-in-out infinite;
             top: -50%;
             left: -50%;
+            background:
+                radial-gradient(circle at 18% 45%, rgba(11, 114, 185, 0.28) 0%, transparent 42%),
+                radial-gradient(circle at 82% 76%, rgba(16, 163, 127, 0.22) 0%, transparent 42%),
+                radial-gradient(circle at 42% 16%, rgba(255, 209, 102, 0.18) 0%, transparent 38%);
+            animation: gradientShift 10s ease-in-out infinite;
         }
 
         .animated-bg::after {
             content: '';
             position: absolute;
-            width: 100%;
-            height: 100%;
-            background-image: 
-                linear-gradient(90deg, transparent 0%, rgba(11, 114, 185, 0.03) 50%, transparent 100%),
-                linear-gradient(180deg, transparent 0%, rgba(16, 163, 127, 0.02) 50%, transparent 100%);
-            animation: waveMotion 20s linear infinite;
+            inset: 0;
+            background-image:
+                linear-gradient(90deg, transparent 0%, rgba(11, 114, 185, 0.08) 50%, transparent 100%),
+                linear-gradient(180deg, transparent 0%, rgba(16, 163, 127, 0.06) 50%, transparent 100%);
+            animation: waveMotion 12s linear infinite;
         }
 
         @keyframes gradientShift {
-            0%, 100% {
-                transform: translate(0, 0) scale(1);
-            }
-            25% {
-                transform: translate(-30px, -30px) scale(1.05);
-            }
-            50% {
-                transform: translate(0, -50px) scale(1.1);
-            }
-            75% {
-                transform: translate(30px, -30px) scale(1.05);
-            }
+            0%, 100% { transform: translate(0, 0) scale(1); }
+            25% { transform: translate(-34px, -34px) scale(1.05); }
+            50% { transform: translate(0, -58px) scale(1.12); }
+            75% { transform: translate(34px, -34px) scale(1.05); }
         }
 
         @keyframes waveMotion {
-            0% {
-                transform: translateY(0) translateX(0);
-            }
-            50% {
-                transform: translateY(-20px) translateX(-20px);
-            }
-            100% {
-                transform: translateY(0) translateX(0);
-            }
+            0% { transform: translateY(0) translateX(0); }
+            50% { transform: translateY(-26px) translateX(-26px); }
+            100% { transform: translateY(0) translateX(0); }
         }
 
-        /* Particle System */
         .particles {
             position: absolute;
-            width: 100%;
-            height: 100%;
+            inset: 0;
             pointer-events: none;
         }
 
@@ -85,48 +66,46 @@
         }
 
         .particle-dot {
-            width: 2px;
-            height: 2px;
-            background: rgba(11, 114, 185, 0.5);
+            width: 3px;
+            height: 3px;
+            background: rgba(255, 209, 102, 0.72);
             border-radius: 50%;
-            box-shadow: 0 0 10px rgba(11, 114, 185, 0.3);
+            box-shadow: 0 0 14px rgba(11, 114, 185, 0.65);
         }
 
-        /* Floating Music Button */
         #music-btn {
             position: fixed;
-            bottom: 20px;
             right: 20px;
+            bottom: 20px;
+            display: none;
+            z-index: 9999;
+            padding: 12px 16px;
+            border-radius: 999px;
             background: #0b72b9;
             color: #fff;
-            padding: 12px 16px;
-            border-radius: 50px;
-            cursor: pointer;
-            display: none; /* hidden by default */
             font-size: 14px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
-            z-index: 9999;
-            transition: all 0.3s ease;
+            cursor: pointer;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+            transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
         }
 
         #music-btn:hover {
-            transform: scale(1.1);
-            box-shadow: 0 6px 20px rgba(11, 114, 185, 0.5);
+            transform: translateY(-2px) scale(1.04);
+            background: #10a37f;
+            box-shadow: 0 12px 30px rgba(16, 163, 127, 0.36);
         }
     </style>
 </head>
 <body>
-<!-- Animated Background -->
 <div class="animated-bg">
     <div class="particles" id="particles"></div>
 </div>
 
-<!-- Background music -->
 <audio id="bgm" autoplay loop>
     <source src="{{ asset('sounds/bgm.mp3') }}" type="audio/mpeg">
 </audio>
 
-<div id="music-btn">▶ Play Music</div>
+<div id="music-btn">Play Music</div>
 
 <header class="site-header">
     <div class="container">
@@ -150,45 +129,35 @@
 
 <footer class="site-footer">
     <div class="container">
-        © {{ date('Y') }} Linkon Mondol — BSc in CSE, Daffodil International University
+        Copyright {{ date('Y') }} Linkon Mondol - BSc in CSE, Daffodil International University
     </div>
 </footer>
 
 <script>
-    // Particle Animation System
     function initParticles() {
         const particleContainer = document.getElementById('particles');
         if (!particleContainer) return;
 
-        const particleCount = 40;
+        const particleCount = 75;
         const particles = [];
 
         for (let i = 0; i < particleCount; i++) {
             const particle = document.createElement('div');
             particle.className = 'particle';
-            
+
             const dotDiv = document.createElement('div');
             dotDiv.className = 'particle-dot';
             particle.appendChild(dotDiv);
-            
             particleContainer.appendChild(particle);
 
-            const size = Math.random() * 3 + 1;
+            const size = Math.random() * 3.5 + 1.5;
             const x = Math.random() * window.innerWidth;
             const y = Math.random() * window.innerHeight;
-            const vx = (Math.random() - 0.5) * 0.5;
-            const vy = (Math.random() - 0.5) * 0.5;
-            const opacity = Math.random() * 0.5 + 0.3;
+            const vx = (Math.random() - 0.5) * 0.9;
+            const vy = (Math.random() - 0.5) * 0.9;
+            const opacity = Math.random() * 0.55 + 0.4;
 
-            particles.push({
-                el: particle,
-                x: x,
-                y: y,
-                vx: vx,
-                vy: vy,
-                size: size,
-                opacity: opacity
-            });
+            particles.push({ el: particle, x, y, vx, vy, size, opacity });
 
             particle.style.width = size + 'px';
             particle.style.height = size + 'px';
@@ -197,25 +166,20 @@
             particle.style.opacity = opacity;
         }
 
-        // Animation loop
         function animate() {
-            particles.forEach(p => {
+            particles.forEach((p) => {
                 p.x += p.vx;
                 p.y += p.vy;
 
-                // Wrap around edges
                 if (p.x < 0) p.x = window.innerWidth;
                 if (p.x > window.innerWidth) p.x = 0;
                 if (p.y < 0) p.y = window.innerHeight;
                 if (p.y > window.innerHeight) p.y = 0;
 
-                // Gentle floating motion
                 p.vy += (Math.random() - 0.5) * 0.05;
                 p.vx += (Math.random() - 0.5) * 0.05;
-
-                // Limit velocity
-                p.vx = Math.max(-1, Math.min(1, p.vx));
-                p.vy = Math.max(-1, Math.min(1, p.vy));
+                p.vx = Math.max(-1.15, Math.min(1.15, p.vx));
+                p.vy = Math.max(-1.15, Math.min(1.15, p.vy));
 
                 p.el.style.left = p.x + 'px';
                 p.el.style.top = p.y + 'px';
@@ -226,33 +190,30 @@
 
         animate();
 
-        // Handle window resize
         window.addEventListener('resize', () => {
-            particles.forEach(p => {
+            particles.forEach((p) => {
                 if (p.x > window.innerWidth) p.x = window.innerWidth;
                 if (p.y > window.innerHeight) p.y = window.innerHeight;
             });
         });
     }
 
-    // Music Control
     function initAudioControl() {
-        const audio = document.getElementById("bgm");
-        const btn = document.getElementById("music-btn");
-
-        if (!audio) return;
+        const audio = document.getElementById('bgm');
+        const btn = document.getElementById('music-btn');
+        if (!audio || !btn) return;
 
         audio.volume = 0.25;
         let isPlaying = true;
 
         const playPromise = audio.play();
         if (playPromise !== undefined) {
-            playPromise.then(function() {
-                btn.innerHTML = "⏸ Pause Music";
+            playPromise.then(() => {
+                btn.innerHTML = 'Pause Music';
                 btn.style.display = 'block';
                 isPlaying = true;
-            }).catch(function(error) {
-                btn.innerHTML = "▶ Play Music";
+            }).catch(() => {
+                btn.innerHTML = 'Play Music';
                 btn.style.display = 'block';
                 isPlaying = false;
             });
@@ -261,37 +222,33 @@
             isPlaying = false;
         }
 
-        btn.addEventListener("click", function () {
+        btn.addEventListener('click', () => {
             if (isPlaying) {
                 audio.pause();
-                btn.innerHTML = "▶ Play Music";
+                btn.innerHTML = 'Play Music';
                 isPlaying = false;
             } else {
                 audio.play();
-                btn.innerHTML = "⏸ Pause Music";
+                btn.innerHTML = 'Pause Music';
                 isPlaying = true;
             }
         });
 
-        audio.addEventListener("ended", function() {
-            btn.innerHTML = "▶ Play Music";
+        audio.addEventListener('ended', () => {
+            btn.innerHTML = 'Play Music';
             isPlaying = false;
         });
     }
 
-    // Snowfall Animation System
     function initSnowfall() {
         const snowfallContainer = document.getElementById('snowfall');
         if (!snowfallContainer) return;
 
-        const snowflakeCount = 50;
-        const snowflakes = [];
-
         function createSnowflake() {
             const snowflake = document.createElement('div');
             snowflake.className = 'snowflake';
-            snowflake.innerHTML = '❄';
-            
+            snowflake.innerHTML = '*';
+
             const size = Math.random() * 1.5 + 0.5;
             const left = Math.random() * 100;
             const duration = Math.random() * 10 + 10;
@@ -306,42 +263,28 @@
             snowflake.style.animationTimingFunction = 'linear';
 
             snowfallContainer.appendChild(snowflake);
-            
-            // Remove snowflake after animation ends
-            setTimeout(() => {
-                snowflake.remove();
-            }, (duration + delay) * 1000);
+            setTimeout(() => snowflake.remove(), (duration + delay) * 1000);
         }
 
-        // Create snowflakes continuously
-        const snowfallInterval = setInterval(() => {
-            createSnowflake();
-        }, 200);
-
-        // Stop creating snowflakes after 30 seconds (when section is likely not visible)
-        setTimeout(() => {
-            clearInterval(snowfallInterval);
-        }, 30000);
+        const snowfallInterval = setInterval(createSnowflake, 200);
+        setTimeout(() => clearInterval(snowfallInterval), 30000);
     }
 
-    // Text animation staggering (for multiple animated elements)
     function initTextAnimations() {
         const animatedTexts = document.querySelectorAll('.animate-slide-in-text');
         animatedTexts.forEach((el, index) => {
             if (!el.style.animationDelay) {
-                el.style.animationDelay = (index * 0.15) + 's';
+                el.style.animationDelay = (index * 0.12) + 's';
             }
         });
     }
 
-    // Initialize everything
-    document.addEventListener("DOMContentLoaded", function () {
+    document.addEventListener('DOMContentLoaded', () => {
         initParticles();
         initAudioControl();
         initSnowfall();
         initTextAnimations();
     });
 </script>
-
 </body>
 </html>

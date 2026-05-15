@@ -6,9 +6,7 @@
         <h2>Contact Me</h2>
 
         @if(session('success'))
-            <div style="background: #10a37f; color: #fff; padding: 15px; border-radius: 8px; margin-bottom: 20px; text-align: center; font-weight: bold;">
-                ✓ {{ session('success') }}
-            </div>
+            <div class="alert success">Message sent successfully.</div>
         @endif
 
         <form action="{{ route('contact.store') }}" method="post" class="contact-form" id="contactForm">
@@ -21,14 +19,14 @@
         </form>
     </div>
 </section>
- 
+
 <script>
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('contactForm');
     if (!form) return;
+
     const btn = document.getElementById('contactSubmit');
-    form.addEventListener('submit', function (e) {
-        // Add sending state and allow form to submit normally
+    form.addEventListener('submit', function () {
         if (btn) {
             btn.classList.add('sending');
             btn.disabled = true;

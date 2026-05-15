@@ -5,8 +5,8 @@
     <div class="container hero-inner">
         <div class="hero-left slide-up">
             <h1 class="animate-slide-in-text">Hi, Myself <span class="name">Linkon Mondol</span></h1>
-            <p class="subtitle animate-slide-in-text" style="animation-delay: 0.2s;">BSc in Computer Science & Engineering — Daffodil International University</p>
-            <p class="subtitle animate-slide-in-text" style="animation-delay: 0.4s;">Web Developer • Laravel • PHP • MySQL</p>
+            <p class="subtitle animate-slide-in-text" style="animation-delay: 0.2s;">BSc in Computer Science & Engineering - Daffodil International University</p>
+            <p class="subtitle animate-slide-in-text" style="animation-delay: 0.4s;">Web Developer - Laravel - PHP - MySQL</p>
             <a class="btn animate-slide-in-text" href="{{ route('projects') }}" style="animation-delay: 0.6s;">Explore My Projects</a>
         </div>
 
@@ -34,7 +34,7 @@
                 </div>
             @endif
         @empty
-            <p style="color: #ddd; text-align: center; grid-column: 1/-1;">No projects with files uploaded yet.</p>
+            <p class="empty-state">No projects with files uploaded yet.</p>
         @endforelse
     </div>
 </section>

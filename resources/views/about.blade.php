@@ -11,7 +11,7 @@
             <h2 class="animate-slide-in-text">About Me</h2>
             <p class="animate-slide-in-text"><strong>Name:</strong> Linkon Mondol</p>
             <p class="animate-slide-in-text"><strong>Education:</strong> BSc in Computer Science & Engineering, Daffodil International University</p>
-            <p class="animate-slide-in-text"><strong>Location:</strong> Hometown: Faridpur — Current: Dhaka</p>
+            <p class="animate-slide-in-text"><strong>Location:</strong> Hometown: Faridpur - Current: Dhaka</p>
             <p class="animate-slide-in-text"><strong>Short Bio:</strong> I am a CSE student who likes coding and building web applications using Laravel and PHP. I enjoy solving problems and learning new technologies.</p>
 
             <h3 class="animate-slide-in-text">Skills</h3>
